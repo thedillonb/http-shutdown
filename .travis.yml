@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-- '0.12'
-- '4.0'
+  - '0.12'
+  - '4.0'
+  - 'iojs'
+script: "npm run test-travis"
+after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
 deploy:
   provider: npm
   email: thedillonb@gmail.com
