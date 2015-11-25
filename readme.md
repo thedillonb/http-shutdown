@@ -6,7 +6,9 @@ Shutdown a Nodejs HTTP server gracefully by doing the following:
 3. Wait for all in-flight requests to finish before closing their sockets.
 4. Profit!
 
-Other solutions might just use `server.close` which only terminates the listening socket and waits for other sockets to close - which is incomplete since keep-alive sockets can still make requests. Or, they may use `ref()/unref()` to simply cause Nodejs to terminate if the sockets are idle - which doesn't help if you have other things to shutdown after the server shutsdown. `http-shutdown` is a complete solution. It uses idle indicators combined with an active socket list to safely, and gracefully, close all sockets. It does not use `ref()/unref()` but, instead, actively closes connections as they finish meaning that socket 'close' events still work correctly since the sockets are actually closing - you're not just `unref`ing and forgetting about them.
+Other solutions might just use `server.close` which only terminates the listening socket and waits for other sockets to close - which is incomplete since keep-alive sockets can still make requests. Or, they may use `ref()/unref()` to simply cause Nodejs to terminate if the sockets are idle - which doesn't help if you have other things to shutdown after the server shutsdown.
+
+`http-shutdown` is a complete solution. It uses idle indicators combined with an active socket list to safely, and gracefully, close all sockets. It does not use `ref()/unref()` but, instead, actively closes connections as they finish meaning that socket 'close' events still work correctly since the sockets are actually closing - you're not just `unref`ing and forgetting about them.
 
 ## Installation
 
