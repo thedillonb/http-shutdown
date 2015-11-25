@@ -1,6 +1,12 @@
 # Http-Shutdown ![](https://img.shields.io/travis/thedillonb/http-shutdown.svg?style=flat-square) ![](https://img.shields.io/coveralls/thedillonb/http-shutdown.svg) ![](https://img.shields.io/npm/v/http-shutdown.svg?style=flat-square)
 Shutdown a Nodejs HTTP server gracefully by terminating the listening socket, then destroying all keep-alive idle sockets all while allowing in-flight requests to finish. Don't be fooled by other "shutdown" techniques. This solution is complete and takes into account many factors left out by other solutions.
 
+## Installation
+
+```bash
+$ npm install http-shutdown
+```
+
 ## Usage
 There are currently two ways to use this library. The first is explicit wrapping of the `Server` object:
 
@@ -10,10 +16,15 @@ var server = require('http').createServer(function(req, res) {
   res.end('Good job!');
 });
 
-// Wrap the server object with additional functionality
+// Wrap the server object with additional functionality.
+// This should be done immediately after server construction, or before you start listening.
+// Additional functionailiy needs to be added for http server events to properly shutdown.
 server = require('http-shutdown')(server);
 
-// Sometime later, shutdown the server.
+// Listen on a port and start taking requests.
+server.listen(3000);
+
+// Sometime later... shutdown the server.
 server.shutdown(function() {
   console.log('Everything is cleanly shutdown.');
 });
@@ -23,7 +34,7 @@ The second is implicitly adding prototype functionality to the `Server` object:
 
 ```javascript
 // .extend adds a .withShutdown prototype method to the Server object
-var httpShutdown = require('http-shutdown').extend();
+require('http-shutdown').extend();
 
 var server = require('http').createServer(function(req, res) {
   res.end('God job!');
