@@ -1,4 +1,4 @@
-# Http-Shutdown ![](https://img.shields.io/travis/thedillonb/http-shutdown.svg?style=flat-square)
+# Http-Shutdown ![](https://img.shields.io/travis/thedillonb/http-shutdown.svg?style=flat-square) ![](https://img.shields.io/npm/v/http-shutdown.svg?style=flat-square) ![](http://img.shields.io/npm/dm/http-shutdown.svg?style=flat-square)
 Shutdown a Nodejs HTTP server gracefully by terminating the listening socket, then destroying all keep-alive idle sockets all while allowing in-flight requests to finish. Don't be fooled by other "shutdown" techniques. This solution is complete and takes into account many factors left out by other solutions.
 
 ## Usage
