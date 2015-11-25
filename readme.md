@@ -1,4 +1,4 @@
-# Http-Shutdown ![](https://img.shields.io/travis/thedillonb/http-shutdown.svg?style=flat-square) ![](https://img.shields.io/coveralls/thedillonb/http-shutdown.svg) ![](https://img.shields.io/npm/v/http-shutdown.svg?style=flat-square)
+# Http-Shutdown [![NPM version][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Test coverage][coveralls-image]][coveralls-url]
 Shutdown a Nodejs HTTP server gracefully by doing the following:
 
 1. Close the listening socket to prevent new connections
@@ -75,3 +75,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+[npm-image]: https://img.shields.io/npm/v/http-shutdown.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/http-shutdown
+[travis-image]: https://img.shields.io/travis/thedillonb/http-shutdown.svg?style=flat-square
+[travis-url]: https://travis-ci.org/thedillonb/http-shutdown
+[coveralls-image]: https://img.shields.io/coveralls/thedillonb/http-shutdown.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/thedillonb/http-shutdown
