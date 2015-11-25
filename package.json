@@ -1,0 +1,22 @@
+{
+  "name": "http-shutdown",
+  "version": "1.0.0",
+  "description": "Gracefully shutdown a running HTTP server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "http",
+    "https",
+    "graceful",
+    "shutdown"
+  ],
+  "author": "Dillon Buchanan",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "request": "^2.67.0"
+  }
+}
