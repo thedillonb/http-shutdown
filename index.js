@@ -16,8 +16,8 @@ function addShutdown(server) {
   var isShuttingDown = false;
   var connectionCounter = 0;
 
-  function destroy(socket) {
-    if (socket._isIdle && isShuttingDown) {
+  function destroy(socket, force) {
+    if (force || (socket._isIdle && isShuttingDown)) {
       socket.destroy();
       delete connections[socket._connectionId];
     }
@@ -43,7 +43,7 @@ function addShutdown(server) {
     });
   });
 
-  server.shutdown = function(cb) {
+  function shutdown(force, cb) {
     isShuttingDown = true;
     server.close(function(err) {
       if (cb) {
@@ -52,8 +52,16 @@ function addShutdown(server) {
     });
 
     Object.keys(connections).forEach(function(key) {
-      destroy(connections[key]);
+      destroy(connections[key], force);
     });
+  };
+
+  server.shutdown = function(cb) {
+    shutdown(false, cb);
+  };
+
+  server.forceShutdown = function(cb) {
+    shutdown(true, cb);
   };
 
   return server;

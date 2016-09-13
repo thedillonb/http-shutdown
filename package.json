@@ -11,6 +11,7 @@
     "http",
     "https",
     "graceful",
+    "force",
     "shutdown"
   ],
   "author": "Dillon Buchanan",

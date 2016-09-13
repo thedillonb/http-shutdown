@@ -35,4 +35,22 @@ describe('http-shutdown', function(done) {
       setTimeout(server.shutdown, 100);
     });
   });
+
+  it('Should force shutdown without waiting for outstanding traffic', function(done) {
+    var server = http.createServer(function(req, res) {
+      setTimeout(function() {
+        res.writeHead(200);
+        res.end('All done');
+      }, 500);
+    }).withShutdown();
+
+    server.listen(16789, function(err) {
+      request.get('http://localhost:16789/', function(err, response) {
+        should.exist(err);
+        done();
+      });
+
+      setTimeout(server.forceShutdown, 100);
+    });
+  });
 });
