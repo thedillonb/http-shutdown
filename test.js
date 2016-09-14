@@ -6,7 +6,7 @@ var request = require('request');
 describe('http-shutdown', function(done) {
   it('Should shutdown with no traffic', function(done) {
     var server = http.createServer(function(req, res) {
-      res.end('OK');
+      done.fail();
     }).withShutdown();
 
     server.listen(16789, function() {
@@ -39,8 +39,7 @@ describe('http-shutdown', function(done) {
   it('Should force shutdown without waiting for outstanding traffic', function(done) {
     var server = http.createServer(function(req, res) {
       setTimeout(function() {
-        res.writeHead(200);
-        res.end('All done');
+        done.fail();
       }, 500);
     }).withShutdown();
 
