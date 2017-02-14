@@ -23,6 +23,17 @@ function addShutdown(server) {
     }
   };
 
+  function onConnection(socket) {
+    var id = connectionCounter++;
+    socket._isIdle = true;
+    socket._connectionId = id;
+    connections[id] = socket;
+
+    socket.on('close', function() {
+      delete connections[id];
+    });
+  };
+
   server.on('request', function(req, res) {
     req.socket._isIdle = false;
 
@@ -32,16 +43,8 @@ function addShutdown(server) {
     });
   });
 
-  server.on('connection', function(socket) {
-    var id = connectionCounter++;
-    socket._isIdle = true;
-    socket._connectionId = id;
-    connections[id] = socket;
-
-    socket.on('close', function() {
-      delete connections[id];
-    });
-  });
+  server.on('connection', onConnection);
+  server.on('secureConnection', onConnection);
 
   function shutdown(force, cb) {
     isShuttingDown = true;
