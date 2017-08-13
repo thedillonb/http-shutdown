@@ -50,7 +50,7 @@ function addShutdown(server) {
     isShuttingDown = true;
     server.close(function(err) {
       if (cb) {
-        process.nextTick(function() { cb(err) });
+        process.nextTick(function() { cb(err); });
       }
     });
 
