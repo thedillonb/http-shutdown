@@ -34,8 +34,11 @@ server = require('http-shutdown')(server);
 server.listen(3000);
 
 // Sometime later... shutdown the server.
-server.shutdown(function() {
-  console.log('Everything is cleanly shutdown.');
+server.shutdown(function(err) {
+	if (err) {
+		return console.log('shutdown failed', err.message);
+	}
+	console.log('Everything is cleanly shutdown.');
 });
 ```
 
@@ -50,9 +53,17 @@ var server = require('http').createServer(function(req, res) {
 }).withShutdown(); // <-- Easy to chain. Returns the Server object
 
 // Sometime later, shutdown the server.
-server.shutdown(function() {
+server.shutdown(function(err) {
+	if (err) {
+		return console.log('shutdown failed', err.message);
+	}
   console.log('Everything is cleanly shutdown.');
 });
+```
+
+## Test
+```bash
+$ npm test
 ```
 
 [npm-image]: https://img.shields.io/npm/v/http-shutdown.svg?style=flat-square
